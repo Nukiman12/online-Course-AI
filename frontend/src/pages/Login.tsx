@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAuthStore } from '../store/authStore'
 import { authService } from '../api/services'
-import { LogIn, GraduationCap } from 'lucide-react'
+import { LogIn, GraduationCap, Lock, User, ArrowRight, Crown } from 'lucide-react'
 
 export default function Login() {
   const [username, setUsername] = useState('')
@@ -35,119 +35,254 @@ export default function Login() {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      padding: '20px'
+      padding: '20px',
+      background: 'linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%)'
     }}>
-      <div className="card" style={{
-        maxWidth: '450px',
+      <div style={{
         width: '100%',
-        animation: 'fadeIn 0.5s ease-out'
+        maxWidth: '480px'
       }}>
-        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+        {/* Logo & Brand */}
+        <div style={{ 
+          textAlign: 'center', 
+          marginBottom: '48px',
+          animation: 'fadeInUp 0.8s ease-out'
+        }}>
           <div style={{
             display: 'inline-flex',
-            padding: '16px',
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-            borderRadius: '50%',
-            marginBottom: '16px'
+            padding: '20px',
+            background: '#000000',
+            borderRadius: '20px',
+            marginBottom: '28px',
+            boxShadow: '8px 8px 0 #e0e0e0',
+            border: '3px solid #000000'
           }}>
-            <GraduationCap size={40} color="white" />
+            <Crown size={48} color="white" />
           </div>
           <h1 style={{
-            fontSize: '32px',
-            fontWeight: 'bold',
-            marginBottom: '8px',
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent'
+            fontSize: '48px',
+            fontWeight: 900,
+            marginBottom: '12px',
+            color: '#000000',
+            letterSpacing: '-2px',
+            fontFamily: "'Playfair Display', serif"
           }}>
-            Добро пожаловать в EduAI
+            Добро пожаловать
           </h1>
-          <p style={{ color: '#6b7280' }}>
-            Войдите в свой аккаунт для продолжения
+          <div className="decorative-line" />
+          <p style={{
+            fontSize: '16px',
+            color: '#666666',
+            letterSpacing: '2px',
+            textTransform: 'uppercase',
+            fontWeight: 600,
+            marginTop: '16px'
+          }}>
+            EduAI Premium Education
           </p>
         </div>
 
-        {error && (
-          <div style={{
-            padding: '12px',
-            background: '#fee2e2',
-            color: '#991b1b',
-            borderRadius: '8px',
-            marginBottom: '20px',
-            textAlign: 'center'
-          }}>
-            {error}
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit}>
-          <div className="input-group">
-            <label className="input-label">Имя пользователя</label>
-            <input
-              type="text"
-              className="input"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="Введите имя пользователя"
-              required
-            />
-          </div>
-
-          <div className="input-group">
-            <label className="input-label">Пароль</label>
-            <input
-              type="password"
-              className="input"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Введите пароль"
-              required
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="btn btn-primary"
-            style={{ width: '100%', justifyContent: 'center' }}
-            disabled={loading}
-          >
-            <LogIn size={20} />
-            {loading ? 'Вход...' : 'Войти'}
-          </button>
-        </form>
-
-        <div style={{
-          marginTop: '24px',
-          textAlign: 'center',
-          color: '#6b7280'
+        {/* Login Card */}
+        <div className="card" style={{
+          padding: '48px',
+          animation: 'scaleIn 0.8s ease-out',
+          border: '3px solid #000000',
+          boxShadow: '12px 12px 0 #000000',
+          background: 'white'
         }}>
-          Нет аккаунта?{' '}
-          <Link
-            to="/register"
-            style={{
-              color: '#667eea',
+          {error && (
+            <div style={{
+              padding: '16px 20px',
+              background: '#f5f5f5',
+              color: '#000000',
+              borderRadius: '8px',
+              marginBottom: '28px',
+              textAlign: 'center',
+              border: '2px solid #000000',
+              fontSize: '15px',
               fontWeight: 600,
-              textDecoration: 'none'
-            }}
-          >
-            Зарегистрироваться
-          </Link>
+              animation: 'fadeIn 0.3s ease-out'
+            }}>
+              {error}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit}>
+            <div className="input-group">
+              <label className="input-label">
+                Имя пользователя
+              </label>
+              <div style={{ position: 'relative' }}>
+                <input
+                  type="text"
+                  className="input"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="Введите имя пользователя"
+                  required
+                  style={{
+                    paddingLeft: '52px',
+                    fontSize: '16px',
+                    border: '2px solid #e0e0e0'
+                  }}
+                />
+                <User 
+                  size={20} 
+                  style={{
+                    position: 'absolute',
+                    left: '18px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    color: '#000000'
+                  }}
+                />
+              </div>
+            </div>
+
+            <div className="input-group">
+              <label className="input-label">
+                Пароль
+              </label>
+              <div style={{ position: 'relative' }}>
+                <input
+                  type="password"
+                  className="input"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Введите пароль"
+                  required
+                  style={{
+                    paddingLeft: '52px',
+                    fontSize: '16px',
+                    border: '2px solid #e0e0e0'
+                  }}
+                />
+                <Lock 
+                  size={20} 
+                  style={{
+                    position: 'absolute',
+                    left: '18px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    color: '#000000'
+                  }}
+                />
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              className="btn btn-primary"
+              style={{ 
+                width: '100%', 
+                justifyContent: 'center',
+                fontSize: '15px',
+                padding: '18px',
+                marginTop: '12px'
+              }}
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  <div className="spinner" style={{ 
+                    width: '20px', 
+                    height: '20px',
+                    borderWidth: '2px'
+                  }} />
+                  Вход...
+                </>
+              ) : (
+                <>
+                  Войти
+                  <ArrowRight size={20} />
+                </>
+              )}
+            </button>
+          </form>
+
+          <div style={{
+            marginTop: '32px',
+            textAlign: 'center',
+            fontSize: '15px',
+            color: '#666666'
+          }}>
+            Нет аккаунта?{' '}
+            <Link
+              to="/register"
+              style={{
+                color: '#000000',
+                fontWeight: 700,
+                textDecoration: 'underline',
+                textUnderlineOffset: '4px'
+              }}
+            >
+              Зарегистрироваться
+            </Link>
+          </div>
         </div>
 
+        {/* Test Accounts Info */}
         <div style={{
-          marginTop: '24px',
-          padding: '16px',
-          background: '#f3f4f6',
-          borderRadius: '8px',
-          fontSize: '14px'
+          marginTop: '32px',
+          padding: '28px',
+          borderRadius: '16px',
+          border: '2px solid #e0e0e0',
+          background: 'white',
+          animation: 'fadeIn 0.8s ease-out 0.4s both'
         }}>
-          <p style={{ fontWeight: 600, marginBottom: '8px' }}>Тестовые аккаунты:</p>
-          <p>Студент: student / password</p>
-          <p>Преподаватель: teacher / password</p>
+          <div style={{
+            fontWeight: 700, 
+            fontSize: '13px',
+            color: '#000000',
+            marginBottom: '20px',
+            letterSpacing: '2px',
+            textTransform: 'uppercase',
+            textAlign: 'center'
+          }}>
+            Тестовые аккаунты
+          </div>
+          <div style={{
+            display: 'grid',
+            gap: '14px',
+            fontSize: '14px'
+          }}>
+            <div style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              padding: '14px 18px',
+              background: '#f5f5f5',
+              borderRadius: '8px',
+              border: '1px solid #e0e0e0'
+            }}>
+              <span style={{ fontWeight: 600 }}>👨‍🎓 Студент:</span>
+              <code style={{ 
+                fontFamily: 'monospace',
+                fontWeight: 600,
+                color: '#000000'
+              }}>
+                student / password
+              </code>
+            </div>
+            <div style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              padding: '14px 18px',
+              background: '#f5f5f5',
+              borderRadius: '8px',
+              border: '1px solid #e0e0e0'
+            }}>
+              <span style={{ fontWeight: 600 }}>👨‍🏫 Преподаватель:</span>
+              <code style={{ 
+                fontFamily: 'monospace',
+                fontWeight: 600,
+                color: '#000000'
+              }}>
+                teacher / password
+              </code>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   )
 }
-
-
