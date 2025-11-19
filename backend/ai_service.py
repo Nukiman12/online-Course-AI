@@ -7,6 +7,8 @@ import json
 load_dotenv()
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
+MODEL_NAME = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+
 
 class AIService:
     
@@ -34,7 +36,7 @@ class AIService:
             messages.append({"role": "user", "content": message})
             
             response = openai.chat.completions.create(
-                model="gpt-4",
+                model=MODEL_NAME,
                 messages=messages,
                 temperature=0.7,
                 max_tokens=1000
@@ -67,7 +69,7 @@ class AIService:
         
         try:
             response = openai.chat.completions.create(
-                model="gpt-4",
+                model=MODEL_NAME,
                 messages=[
                     {"role": "system", "content": "Ты - эксперт по созданию образовательных конспектов. Создавай структурированные и понятные конспекты."},
                     {"role": "user", "content": prompt}
@@ -103,7 +105,7 @@ class AIService:
         
         try:
             response = openai.chat.completions.create(
-                model="gpt-4",
+                model=MODEL_NAME,
                 messages=[
                     {"role": "system", "content": "Ты - эксперт по созданию образовательных заданий. Создавай разнообразные и полезные практические материалы."},
                     {"role": "user", "content": prompt}
@@ -149,7 +151,7 @@ class AIService:
         
         try:
             response = openai.chat.completions.create(
-                model="gpt-4",
+                model=MODEL_NAME,
                 messages=[
                     {"role": "system", "content": "Ты - AI ассистент преподавателя. Проверяй работы студентов объективно и давай конструктивную обратную связь."},
                     {"role": "user", "content": prompt}
@@ -201,7 +203,7 @@ class AIService:
         
         try:
             response = openai.chat.completions.create(
-                model="gpt-4",
+                model=MODEL_NAME,
                 messages=[
                     {"role": "system", "content": "Ты - эксперт по планированию обучения. Создавай эффективные расписания с учетом педагогических принципов."},
                     {"role": "user", "content": prompt}
@@ -234,7 +236,7 @@ class AIService:
         
         try:
             response = openai.chat.completions.create(
-                model="gpt-4",
+                model=MODEL_NAME,
                 messages=[
                     {"role": "system", "content": "Ты - эксперт по образовательным ресурсам. Рекомендуй качественные и актуальные материалы."},
                     {"role": "user", "content": prompt}
